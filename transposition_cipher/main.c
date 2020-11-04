@@ -42,9 +42,16 @@ void transpose_data(char *data, int len) {
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            newdata[i+j*n] = data[i*n+j];
+            printf("%d, %d\n", i, j);
+            if (data[n*j+i] == '\0') data[n*j+i] = '.';
+            newdata[i*n+j] = data[n*j+i];
         }
     }
+    /* write to file */
+    char *fname = "out.txt"; 
+    FILE *fp = fopen(fname, "w+");
+    fprintf(fp,"%s", newdata);
+    fclose(fp);
     printf("%s", newdata);
 }
 
